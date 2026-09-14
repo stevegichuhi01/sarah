@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Sarah</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #3b0a1f 0%, #6b1732 35%, #a3294f 65%, #d94f6e 100%);
+    font-family: 'Cormorant Garamond', serif;
+    color: #fff3f5;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .sky {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .petal {
+    position: absolute;
+    top: -10%;
+    font-size: 20px;
+    opacity: 0.85;
+    animation: fall linear infinite;
+    filter: drop-shadow(0 0 4px rgba(255,182,193,0.4));
+  }
+
+  @keyframes fall {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.9; }
+    100% { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0.2; }
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 70px 28px 90px;
+  }
+
+  .cake {
+    text-align: center;
+    font-size: 46px;
+    animation: bob 3s ease-in-out infinite;
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    text-align: center;
+    font-size: clamp(34px, 6vw, 54px);
+    margin-top: 18px;
+    background: linear-gradient(90deg, #ffd9e0, #ffb6c1, #ffd9e0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0.5px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 19px;
+    font-style: italic;
+    color: #f6c9d3;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    margin: 34px auto;
+    background: linear-gradient(90deg, transparent, #ffb6c1, transparent);
+    position: relative;
+  }
+  .divider::after {
+    content: "❤";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #3b0a1f, #6b1732);
+    padding: 0 12px;
+    color: #ff8fa3;
+    font-size: 16px;
+  }
+
+  .letter {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 214, 224, 0.25);
+    border-radius: 18px;
+    padding: 44px 40px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  }
+
+  .letter p {
+    font-size: 21px;
+    line-height: 1.85;
+    margin-bottom: 24px;
+    color: #fdeef1;
+  }
+
+  .letter p:last-of-type { margin-bottom: 0; }
+
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 54px;
+    float: left;
+    line-height: 0.8;
+    padding-right: 10px;
+    padding-top: 6px;
+    color: #ffb6c1;
+    font-weight: 600;
+  }
+
+  .signoff {
+    text-align: center;
+    margin-top: 46px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 26px;
+    color: #ffd9e0;
+  }
+
+  .hearts-row {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 22px;
+    letter-spacing: 10px;
+    color: #ff8fa3;
+    opacity: 0.9;
+  }
+
+  .balloons {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 40px;
+    letter-spacing: 14px;
+  }
+
+  em { color: #ffcfd9; font-style: italic; }
+
+  @media (max-width: 480px) {
+    .letter { padding: 32px 22px; }
+    .letter p { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sky" id="sky"></div>
+
+<div class="wrap">
+  <div class="cake">🎂</div>
+  <h1>Happy Birthday, Dearest Sarah</h1>
+  <div class="subtitle">just past midnight, and already thinking of you</div>
+
+  <div class="divider"></div>
+
+  <div class="letter">
+    <p class="drop-cap">It's just past midnight, and I couldn't let your birthday begin without telling you how much you mean to me. Before the day gets busy and everyone starts wishing you, I just wanted you to know that you're already on my mind.</p>
+
+    <p>I'm genuinely grateful that you came into my life. You've given me so many moments that I'll always cherish, and there's something about you that makes my world feel a little warmer and happier. I may not always find the perfect words to express it, but I hope you know that I care about you deeply.</p>
+
+    <p>Today, I wish you more than just a happy birthday. I wish you <em>peace</em> when life gets difficult, <em>courage</em> when you doubt yourself, and countless moments that make your heart genuinely happy. I hope you achieve the things you dream about and become everything you've always wanted to be.</p>
+
+    <p>And selfishly, I hope I get to be beside you through many more birthdays, making memories, laughing together, and watching you grow into the beautiful person you're meant to become.</p>
+
+    <p>Happy birthday, Sarah. You are truly special to me, and I hope today reminds you of just how loved and appreciated you are.</p>
+  </div>
+
+  <div class="signoff">With all my love</div>
+  <div class="hearts-row">❤ ❤ ❤</div>
+  <div class="balloons">🎈 🌹 🎈</div>
+</div>
+
+<script>
+  const sky = document.getElementById('sky');
+  const symbols = ['🌸','💗','❤','✨','🌹'];
+  const count = 26;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.fontSize = (14 + Math.random() * 14) + 'px';
+    p.style.animationDuration = (8 + Math.random() * 10) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    sky.appendChild(p);
+  }
+</script>
+
+</body>
+</html>
