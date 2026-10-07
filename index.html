@@ -190,6 +190,9 @@
     padding-left: 14px;
   }
 
+  /* Phone-only photo blocks (hidden on tablet/desktop, where the background photos show) */
+  .mobile-only, .mobile-pair { display: none; }
+
   /* ---------- Gallery ---------- */
   .gallery {
     display: flex;
@@ -247,15 +250,44 @@
     .subtitle { font-size: 18px; padding: 0 8px; }
     .divider { margin: 26px auto; }
 
-    /* Photos: main portrait photo fills the screen, corner photos shrink to small accents */
-    .bg-photo   { background-size: cover; background-position: center top; }
-    .bg-photo-2 { background-size: 45vw auto; background-position: top left; }
-    .bg-photo-3 { background-size: 55vw auto; background-position: bottom right; }
+    /* Phone: photos become real, full-size pictures placed in the page
+       (the background-photo trick can't show 3 photos on a narrow screen) */
+    .bg-photo, .bg-photo-2, .bg-photo-3 { display: none; }
+    .mobile-only { display: block; }
+    .mobile-pair { display: flex; }
 
-    /* Stronger dim so text stays readable on a small bright screen */
+    /* Rich rose background instead of photo layers */
     .bg-dim {
-      background: linear-gradient(180deg, rgba(59,10,31,0.62) 0%, rgba(107,23,50,0.6) 50%, rgba(80,15,38,0.72) 100%);
+      background: linear-gradient(160deg, #3b0a1f 0%, #6b1732 40%, #a3294f 75%, #c9486a 100%);
     }
+
+    .hero-photo {
+      width: 100%;
+      height: auto;            /* natural shape, nothing cropped */
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 214, 224, 0.35);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      margin-top: 26px;
+    }
+
+    .photo-pair {
+      gap: 10px;
+      margin-top: 34px;
+      align-items: flex-start;
+    }
+    .photo-pair img {
+      width: calc(50% - 5px);
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center 20%;   /* keeps faces in view */
+      border-radius: 14px;
+      border: 1px solid rgba(255, 214, 224, 0.35);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+    .photo-pair img:nth-child(1) { transform: rotate(-2deg); }
+    .photo-pair img:nth-child(2) { transform: rotate(2deg) translateY(14px); }
 
     .letter {
       padding: 28px 20px;
@@ -296,7 +328,6 @@
   /* Landscape phones: avoid a giant cake + title eating the screen */
   @media (max-height: 480px) and (orientation: landscape) {
     .wrap { padding-top: 24px; padding-bottom: 40px; }
-    .bg-photo { background-size: cover; }
   }
 
   /* Respect people who turn motion off */
@@ -319,6 +350,8 @@
   <h1>Happy Birthday, Dearest Sarah</h1>
   <div class="subtitle">just past midnight, and already thinking of you</div>
 
+  <img class="mobile-only hero-photo" src="sarah.jpeg" alt="Sarah">
+
   <div class="divider"></div>
 
   <div class="letter">
@@ -336,6 +369,11 @@
   <div class="signoff">With all my love</div>
   <div class="hearts-row">❤ ❤ ❤</div>
   <div class="balloons">🎈 🌹 🎈</div>
+
+  <div class="mobile-pair photo-pair">
+    <img src="pppp.jpeg" alt="" loading="lazy">
+    <img src="rrrr.jpeg" alt="" loading="lazy">
+  </div>
 
   <div class="gallery">
     <img src="ss.jpeg" alt="" loading="lazy">
