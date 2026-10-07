@@ -2,64 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3b0a1f">
 <title>Happy Birthday, Sarah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: #3b0a1f; }
 
   body {
     min-height: 100vh;
-    font-family: 'Cormorant Garamond', serif;
+    min-height: 100dvh;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
     color: #fff3f5;
     overflow-x: hidden;
     position: relative;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .bg-photo {
+  /* ---------- Background photos (desktop / tablet default) ---------- */
+  .bg-photo, .bg-photo-2, .bg-photo-3 {
     position: fixed;
     inset: 0;
-    z-index: -3;
-    background-image: url('sarah.jpeg');
-    background-size: 50%;
-    background-position: center;
     background-repeat: no-repeat;
+    pointer-events: none;
   }
-
-  .bg-photo-2 {
-    position: fixed;
-    inset: 0;
-    z-index: -5;
-    background-image: url('pppp.jpeg');
-    background-size: 30%;
-    background-position: top left;
-    background-repeat: no-repeat;
-  }
-
-  .bg-photo-3 {
-    position: fixed;
-    inset: 0;
-    z-index: -5;
-    background-image: url('rrrr.jpeg');
-    background-size: 55%;
-    background-position: bottom right;
-    background-repeat: no-repeat;
-  }
+  .bg-photo   { z-index: -3; background-image: url('sarah.jpeg'); background-size: 50%;  background-position: center; }
+  .bg-photo-2 { z-index: -5; background-image: url('pppp.jpeg');  background-size: 30%;  background-position: top left; }
+  .bg-photo-3 { z-index: -5; background-image: url('rrrr.jpeg');  background-size: 55%;  background-position: bottom right; }
 
   .bg-dim {
     position: fixed;
     inset: 0;
     z-index: -1;
     background: linear-gradient(135deg, rgba(59,10,31,0.55) 0%, rgba(107,23,50,0.5) 35%, rgba(163,41,79,0.5) 65%, rgba(217,79,110,0.5) 100%);
+    pointer-events: none;
   }
 
-  .sky {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
+  .sky { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 
   .petal {
     position: absolute;
@@ -67,21 +51,26 @@
     font-size: 20px;
     opacity: 0.85;
     animation: fall linear infinite;
-    filter: drop-shadow(0 0 4px rgba(255,182,193,0.4));
+    will-change: transform;
   }
 
   @keyframes fall {
-    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    0%   { transform: translate3d(0,0,0) rotate(0deg); opacity: 0; }
     10%  { opacity: 0.9; }
-    100% { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0.2; }
+    100% { transform: translate3d(40px,110vh,0) rotate(360deg); opacity: 0.2; }
   }
 
+  /* ---------- Layout ---------- */
   .wrap {
     position: relative;
     z-index: 1;
     max-width: 680px;
     margin: 0 auto;
-    padding: 70px 28px 90px;
+    padding:
+      calc(70px + env(safe-area-inset-top))
+      calc(28px + env(safe-area-inset-right))
+      calc(90px + env(safe-area-inset-bottom))
+      calc(28px + env(safe-area-inset-left));
   }
 
   .cake {
@@ -89,32 +78,34 @@
     font-size: 46px;
     animation: bob 3s ease-in-out infinite;
   }
-
-  @keyframes bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
   h1 {
     font-family: 'Playfair Display', serif;
     font-weight: 600;
     text-align: center;
-    font-size: clamp(34px, 6vw, 54px);
+    font-size: clamp(32px, 8vw, 54px);
+    line-height: 1.2;
     margin-top: 18px;
     background: linear-gradient(90deg, #ffd9e0, #ffb6c1, #ffd9e0);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
     letter-spacing: 0.5px;
+    text-wrap: balance;
+    /* soft glow keeps the gradient text readable over photos */
+    filter: drop-shadow(0 2px 10px rgba(59,10,31,0.55));
   }
 
   .subtitle {
     text-align: center;
-    font-size: 19px;
+    font-size: 20px;
     font-style: italic;
-    color: #f6c9d3;
+    color: #fbd6de;
     margin-top: 10px;
     letter-spacing: 0.5px;
+    text-shadow: 0 1px 8px rgba(59,10,31,0.7);
   }
 
   .divider {
@@ -127,31 +118,36 @@
   .divider::after {
     content: "❤";
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #3b0a1f, #6b1732);
-    padding: 0 12px;
+    background: #5a1329;
+    border-radius: 50%;
+    padding: 0 10px;
     color: #ff8fa3;
     font-size: 16px;
   }
 
+  /* ---------- Letter card ---------- */
   .letter {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 214, 224, 0.25);
+    background: rgba(59, 10, 31, 0.38);
+    border: 1px solid rgba(255, 214, 224, 0.28);
     border-radius: 18px;
     padding: 44px 40px;
-    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 20px 60px rgba(0,0,0,0.35);
   }
 
   .letter p {
-    font-size: 21px;
-    line-height: 1.85;
+    font-size: 22px;
+    line-height: 1.75;
     margin-bottom: 24px;
-    color: #fdeef1;
+    color: #fff1f4;
+    text-wrap: pretty;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    text-shadow: 0 1px 6px rgba(40,5,20,0.5);
   }
-
   .letter p:last-of-type { margin-bottom: 0; }
 
   .drop-cap::first-letter {
@@ -165,6 +161,8 @@
     font-weight: 600;
   }
 
+  em { color: #ffd2dc; font-style: italic; }
+
   .signoff {
     text-align: center;
     margin-top: 46px;
@@ -172,6 +170,7 @@
     font-style: italic;
     font-size: 26px;
     color: #ffd9e0;
+    text-shadow: 0 1px 8px rgba(59,10,31,0.7);
   }
 
   .hearts-row {
@@ -179,8 +178,8 @@
     margin-top: 18px;
     font-size: 22px;
     letter-spacing: 10px;
+    padding-left: 10px; /* balances trailing letter-spacing so it's truly centered */
     color: #ff8fa3;
-    opacity: 0.9;
   }
 
   .balloons {
@@ -188,50 +187,122 @@
     font-size: 30px;
     margin-top: 40px;
     letter-spacing: 14px;
+    padding-left: 14px;
   }
 
+  /* ---------- Gallery ---------- */
   .gallery {
     display: flex;
     gap: 14px;
     margin-top: 44px;
     position: relative;
   }
-
   .gallery img {
-    width: 50%;
+    width: calc(50% - 7px);
     aspect-ratio: 3 / 4;
     object-fit: cover;
     border-radius: 14px;
-    border: 1px solid rgba(255, 214, 224, 0.25);
+    border: 1px solid rgba(255, 214, 224, 0.28);
     box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     position: relative;
+    will-change: transform;
   }
-
-  .gallery img:nth-child(1) {
-    animation: swap-right 7s ease-in-out infinite;
-  }
-
-  .gallery img:nth-child(2) {
-    animation: swap-left 7s ease-in-out infinite;
-  }
+  .gallery img:nth-child(1) { animation: swap-right 7s ease-in-out infinite; }
+  .gallery img:nth-child(2) { animation: swap-left  7s ease-in-out infinite; }
 
   @keyframes swap-right {
     0%, 15%   { transform: translateX(0) scale(1); z-index: 1; }
     50%       { transform: translateX(calc(100% + 14px)) scale(1.03); z-index: 2; }
     85%, 100% { transform: translateX(0) scale(1); z-index: 1; }
   }
-
   @keyframes swap-left {
     0%, 15%   { transform: translateX(0) scale(1); z-index: 1; }
     50%       { transform: translateX(calc(-100% - 14px)) scale(1.03); z-index: 2; }
     85%, 100% { transform: translateX(0) scale(1); z-index: 1; }
   }
 
-  em { color: #ffcfd9; font-style: italic; }
+  /* ================= TABLET (481px – 900px) ================= */
+  @media (min-width: 481px) and (max-width: 900px) {
+    .wrap { max-width: 620px; padding-top: calc(60px + env(safe-area-inset-top)); }
+    .letter { padding: 40px 34px; }
+    .letter p { font-size: 22px; }
+    /* tablets are tall — let the main photo fill more of the screen */
+    .bg-photo   { background-size: 75%; }
+    .bg-photo-2 { background-size: 40%; }
+    .bg-photo-3 { background-size: 60%; }
+  }
 
+  /* ================= PHONE (up to 480px) ================= */
   @media (max-width: 480px) {
-    .letter { padding: 32px 22px; }
-    .letter p { font-size: 18px; }
+    .wrap {
+      padding:
+        calc(44px + env(safe-area-inset-top))
+        calc(16px + env(safe-area-inset-right))
+        calc(60px + env(safe-area-inset-bottom))
+        calc(16px + env(safe-area-inset-left));
+    }
+
+    .cake { font-size: 40px; }
+    h1 { margin-top: 12px; }
+    .subtitle { font-size: 18px; padding: 0 8px; }
+    .divider { margin: 26px auto; }
+
+    /* Photos: main portrait photo fills the screen, corner photos shrink to small accents */
+    .bg-photo   { background-size: cover; background-position: center top; }
+    .bg-photo-2 { background-size: 45vw auto; background-position: top left; }
+    .bg-photo-3 { background-size: 55vw auto; background-position: bottom right; }
+
+    /* Stronger dim so text stays readable on a small bright screen */
+    .bg-dim {
+      background: linear-gradient(180deg, rgba(59,10,31,0.62) 0%, rgba(107,23,50,0.6) 50%, rgba(80,15,38,0.72) 100%);
+    }
+
+    .letter {
+      padding: 28px 20px;
+      border-radius: 16px;
+      background: rgba(50, 8, 26, 0.5);
+    }
+    .letter p {
+      font-size: 19.5px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .drop-cap::first-letter { font-size: 46px; padding-right: 8px; }
+
+    .signoff { font-size: 24px; margin-top: 34px; }
+    .hearts-row { font-size: 20px; letter-spacing: 8px; padding-left: 8px; }
+    .balloons { font-size: 28px; letter-spacing: 10px; padding-left: 10px; margin-top: 30px; }
+
+    .gallery { gap: 10px; margin-top: 34px; }
+    .gallery img { width: calc(50% - 5px); border-radius: 12px; }
+    @keyframes swap-right {
+      0%, 15%   { transform: translateX(0) scale(1); z-index: 1; }
+      50%       { transform: translateX(calc(100% + 10px)) scale(1.03); z-index: 2; }
+      85%, 100% { transform: translateX(0) scale(1); z-index: 1; }
+    }
+    @keyframes swap-left {
+      0%, 15%   { transform: translateX(0) scale(1); z-index: 1; }
+      50%       { transform: translateX(calc(-100% - 10px)) scale(1.03); z-index: 2; }
+      85%, 100% { transform: translateX(0) scale(1); z-index: 1; }
+    }
+  }
+
+  /* Very small phones */
+  @media (max-width: 360px) {
+    .letter p { font-size: 18.5px; }
+    h1 { font-size: 30px; }
+  }
+
+  /* Landscape phones: avoid a giant cake + title eating the screen */
+  @media (max-height: 480px) and (orientation: landscape) {
+    .wrap { padding-top: 24px; padding-bottom: 40px; }
+    .bg-photo { background-size: cover; }
+  }
+
+  /* Respect people who turn motion off */
+  @media (prefers-reduced-motion: reduce) {
+    .petal, .cake, .gallery img { animation: none !important; }
+    .petal { display: none; }
   }
 </style>
 </head>
@@ -241,7 +312,7 @@
 <div class="bg-photo-2"></div>
 <div class="bg-photo-3"></div>
 <div class="bg-dim"></div>
-<div class="sky" id="sky"></div>
+<div class="sky" id="sky" aria-hidden="true"></div>
 
 <div class="wrap">
   <div class="cake">🎂</div>
@@ -267,21 +338,22 @@
   <div class="balloons">🎈 🌹 🎈</div>
 
   <div class="gallery">
-    <img src="ss.jpeg" alt="">
-    <img src="qq.jpeg" alt="">
+    <img src="ss.jpeg" alt="" loading="lazy">
+    <img src="qq.jpeg" alt="" loading="lazy">
   </div>
 </div>
 
 <script>
   const sky = document.getElementById('sky');
   const symbols = ['🌸','💗','❤','✨','🌹'];
-  const count = 26;
+  // fewer petals on small screens keeps phones smooth and saves battery
+  const count = window.innerWidth < 600 ? 14 : 26;
   for (let i = 0; i < count; i++) {
     const p = document.createElement('div');
     p.className = 'petal';
     p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
     p.style.left = Math.random() * 100 + 'vw';
-    p.style.fontSize = (14 + Math.random() * 14) + 'px';
+    p.style.fontSize = (14 + Math.random() * 12) + 'px';
     p.style.animationDuration = (8 + Math.random() * 10) + 's';
     p.style.animationDelay = (Math.random() * 10) + 's';
     sky.appendChild(p);
