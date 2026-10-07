@@ -190,9 +190,6 @@
     padding-left: 14px;
   }
 
-  /* Phone-only photo blocks (hidden on tablet/desktop, where the background photos show) */
-  .mobile-only, .mobile-pair { display: none; }
-
   /* ---------- Gallery ---------- */
   .gallery {
     display: flex;
@@ -250,44 +247,38 @@
     .subtitle { font-size: 18px; padding: 0 8px; }
     .divider { margin: 26px auto; }
 
-    /* Phone: photos become real, full-size pictures placed in the page
-       (the background-photo trick can't show 3 photos on a narrow screen) */
-    .bg-photo, .bg-photo-2, .bg-photo-3 { display: none; }
-    .mobile-only { display: block; }
-    .mobile-pair { display: flex; }
+    /* Phone: the 3 background photos stay as backgrounds, each given its own
+       zone on the screen so none hides another and nothing is cropped
+       (background-size: contain shows each whole photo). */
+    html { background: linear-gradient(160deg, #3b0a1f 0%, #6b1732 45%, #a3294f 100%) fixed; }
 
-    /* Rich rose background instead of photo layers */
+    /* Main photo: centre of the screen */
+    .bg-photo {
+      inset: 22% 5% 26% 5%;
+      background-size: contain;
+      background-position: center;
+    }
+    /* Photo 2: top-left corner */
+    .bg-photo-2 {
+      inset: 0 auto auto 0;
+      width: 58%;
+      height: 28%;
+      background-size: contain;
+      background-position: top left;
+    }
+    /* Photo 3: bottom-right corner */
+    .bg-photo-3 {
+      inset: auto 0 0 auto;
+      width: 62%;
+      height: 30%;
+      background-size: contain;
+      background-position: bottom right;
+    }
+
+    /* Lighter dim on phones so the photos stay visible; the letter card keeps text readable */
     .bg-dim {
-      background: linear-gradient(160deg, #3b0a1f 0%, #6b1732 40%, #a3294f 75%, #c9486a 100%);
+      background: linear-gradient(180deg, rgba(59,10,31,0.38) 0%, rgba(107,23,50,0.3) 50%, rgba(59,10,31,0.45) 100%);
     }
-
-    .hero-photo {
-      width: 100%;
-      height: auto;            /* natural shape, nothing cropped */
-      max-height: 78vh;
-      object-fit: contain;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 214, 224, 0.35);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-      margin-top: 26px;
-    }
-
-    .photo-pair {
-      gap: 10px;
-      margin-top: 34px;
-      align-items: flex-start;
-    }
-    .photo-pair img {
-      width: calc(50% - 5px);
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      object-position: center 20%;   /* keeps faces in view */
-      border-radius: 14px;
-      border: 1px solid rgba(255, 214, 224, 0.35);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    }
-    .photo-pair img:nth-child(1) { transform: rotate(-2deg); }
-    .photo-pair img:nth-child(2) { transform: rotate(2deg) translateY(14px); }
 
     .letter {
       padding: 28px 20px;
@@ -350,8 +341,6 @@
   <h1>Happy Birthday, Dearest Sarah</h1>
   <div class="subtitle">just past midnight, and already thinking of you</div>
 
-  <img class="mobile-only hero-photo" src="sarah.jpeg" alt="Sarah">
-
   <div class="divider"></div>
 
   <div class="letter">
@@ -369,11 +358,6 @@
   <div class="signoff">With all my love</div>
   <div class="hearts-row">❤ ❤ ❤</div>
   <div class="balloons">🎈 🌹 🎈</div>
-
-  <div class="mobile-pair photo-pair">
-    <img src="pppp.jpeg" alt="" loading="lazy">
-    <img src="rrrr.jpeg" alt="" loading="lazy">
-  </div>
 
   <div class="gallery">
     <img src="ss.jpeg" alt="" loading="lazy">
